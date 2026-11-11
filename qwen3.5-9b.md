@@ -74,6 +74,15 @@ then exhausted its context window before building.
 - During one refinement round it **used the internet** (three Microsoft Learn pages: `Button.Click`,
   `Form.KeyPreview`, `KeyEventArgs.KeyCode`) — no other model had that access.
 
+
+## Third-party reports on these exact weights
+
+- **Reasoning/content split.** [Discussion #2](https://huggingface.co/lmstudio-community/Qwen3.5-9B-GGUF/discussions/2)
+  reports that `response_format` output is routed into `reasoning_content` while `content` comes back empty —
+  the same family of problem as the empty and overlong answers we saw with reasoning-heavy prompts.
+- **Common thread with our results:** the model is fast and capable in dynamic languages, but its chat
+  template and reasoning channel behave differently from what an agent harness expects by default.
+
 ---
 
 Post your own results in the model discussions:

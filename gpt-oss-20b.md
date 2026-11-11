@@ -102,6 +102,20 @@ named `search` seven times (`Error: unknown tool "search"`), trying to grep its 
 - Reports success before verifying: one answer contained nothing but "Build exit code 0" while the binary
   was still stale.
 
+
+## Third-party reports on these exact weights
+
+- **Chat-template channel bug.** [Discussion #274](https://huggingface.co/openai/gpt-oss-20b/discussions/274):
+  the default Jinja template keeps the `commentary` channel valid even when no tools are present, and the
+  author measures BFCL_v4 dropping to ~3% on live tests (36–60% with a fixed template). Template-level, not
+  model-quality.
+- **Agent-loop crash in the template.** [Discussion #272](https://huggingface.co/openai/gpt-oss-20b/discussions/272):
+  the template raises on an assistant tool call with `content: null` — exactly the shape a normal agent loop
+  produces.
+- **Why this matters for our numbers:** our console results were measured with tools present in the request,
+  where the channel bug does not bite; the WinForms failure is a different problem, but template behaviour
+  should be checked before comparing scores across harnesses.
+
 ---
 
 Post your own results in the model discussions:

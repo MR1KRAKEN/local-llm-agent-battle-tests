@@ -70,6 +70,24 @@ out of context on the third round).
 - Loses syntax when assembling a file in chunks: 6 of 7 builds failed on unbalanced braces.
 - Reports "done" even when input handling crashes — verify yourself.
 
+
+## Third-party reports on these exact weights
+
+- **Artifact metadata bug (fixed).** The official `NVIDIA-Nemotron-3.5-Lightning-30B-A3B-Q4_0.gguf` had
+  per-layer `attention.head_count_kv` written as zeros, so block 5 was treated as an SSM block and the loader
+  looked for a non-existent `blk.5.ssm_in.weight`
+  ([llama.cpp issue #27718](https://github.com/ggml-org/llama.cpp/issues/27718), fixed by
+  [PR #27729](https://github.com/ggml-org/llama.cpp/pull/27729), merged 2026-08-26).
+  Our local file has SHA256 `61f87e75…0e3c`, which does **not** match the buggy artifact (`b1cc80f0…486f`),
+  so this run used the re-uploaded fixed file and the numbers above are unaffected.
+- **User report with the same pattern.**
+  [Discussion #1](https://huggingface.co/ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF/discussions/1):
+  400 tok/s and a simple agentic configuration task failed, while Qwen solved it immediately — matching our
+  "fast but structurally weak agent" finding.
+- **Throughput context.** [Discussion #3](https://huggingface.co/ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF/discussions/3)
+  reports 25–111 tok/s on pure CPU. For scale we measured 60.65 tok/s on a 4070 Ti, so the model is not
+  compute-starved in this setup.
+
 ---
 
 Post your own results in the model discussions:

@@ -1,0 +1,26 @@
+{
+ "overview": {
+  "repo": "openai/gpt-oss-20b",
+  "url": "https://huggingface.co/openai/gpt-oss-20b/discussions/278"
+ },
+ "nemotron-30b.md": {
+  "repo": "ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF",
+  "url": "https://huggingface.co/ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF/discussions/4"
+ },
+ "qwen3.5-9b.md": {
+  "repo": "lmstudio-community/Qwen3.5-9B-GGUF",
+  "url": "https://huggingface.co/lmstudio-community/Qwen3.5-9B-GGUF/discussions/3"
+ },
+ "lfm2-24b-a2b.md": {
+  "repo": "lmstudio-community/LFM2-24B-A2B-GGUF",
+  "url": "https://huggingface.co/lmstudio-community/LFM2-24B-A2B-GGUF/discussions/2"
+ },
+ "bonsai-27b.md": {
+  "repo": "lmstudio-community/Bonsai-27B-GGUF",
+  "url": "https://huggingface.co/lmstudio-community/Bonsai-27B-GGUF/discussions/3"
+ },
+ "gpt-oss-20b.md": {
+  "repo": "openai/gpt-oss-20b",
+  "url": "https://huggingface.co/openai/gpt-oss-20b/discussions/279"
+ }
+}

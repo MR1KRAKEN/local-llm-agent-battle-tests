@@ -54,6 +54,19 @@ single response can consume the whole session.
 - Q1_0 visibly degrades even answer coherence: slow TTFT (7.74 s) and long answers without progress.
 - For vision tasks (the model ships with `mmproj`) these tests say nothing — they are about code generation.
 
+
+## Third-party reports on these exact weights
+
+- **The intended runtime is a patched llama.cpp.** The official repository
+  ([prism-ml/Bonsai-27B-gguf](https://huggingface.co/prism-ml/Bonsai-27B-gguf)) states that Q1_0_g128 needs the
+  **PrismML fork of llama.cpp** with dedicated 1-bit hybrid-attention kernels, and claims 76.11 average over
+  15 thinking benchmarks (89.5% of FP16, coding 81.88). **This run used the stock build**, so the degeneration
+  result describes that configuration, not the model in its intended runtime.
+- **Base model is Qwen3.6-27B.** That explains
+  [Discussion #2](https://huggingface.co/lmstudio-community/Bonsai-27B-GGUF/discussions/2), where the model
+  insists it is "Qwen hosted on Alibaba Cloud" and refuses local tools — identity confusion inherited from
+  the base model, amplified by 1-bit quantization.
+
 ---
 
 Post your own results in the model discussions:

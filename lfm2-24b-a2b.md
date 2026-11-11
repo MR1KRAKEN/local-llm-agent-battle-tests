@@ -60,6 +60,19 @@ prefers a textual format over the native one.
 - An indirect signal: the model picked a non-existent tool (`create_goal`) out of a 32-item list, so its
   orientation in a large tool set is weak.
 
+
+## Third-party reports on these exact weights
+
+- **Native tool format is Pythonic.** The official card ([LiquidAI/LFM2-24B-A2B](https://huggingface.co/LiquidAI/LFM2-24B-A2B))
+  specifies tool calls as Python-style calls inside special tokens:
+  `<|tool_call_start|>[get_candidate_status(candidate_id="12345")]<|tool_call_end|>`, and recommends passing
+  the tool list as a JSON object in the system prompt.
+- **This explains our mismatch.** The harness sends OpenAI-style `tools`; through the raw API the model did
+  return `tool_calls`, inside the agent it wrote XML or bare JSON as text. The model is fine — the protocol
+  expectations differ.
+- **Safety note.** [Discussion #1](https://huggingface.co/lmstudio-community/LFM2-24B-A2B-GGUF/discussions/1)
+  reports prompt-injection failures even at Q8, which matters for agentic use beyond this test.
+
 ---
 
 Post your own results in the model discussions:

@@ -1,5 +1,7 @@
 # Qwen3.5-9B (Q4_K_M) — тест в агентном цикле
 
+**Языки:** Русский (этот файл) · [English version](../qwen3.5-9b.md)
+
 **Источник:** [lmstudio-community/Qwen3.5-9B-GGUF](https://huggingface.co/lmstudio-community/Qwen3.5-9B-GGUF)
 **Файл:** `Qwen3.5-9B-Q4_K_M.gguf`, 5 627 044 256 байт (5.24 ГиБ); рядом `mmproj-Qwen3.5-9B-BF16.gguf` (921 МБ)
 **Провайдер:** `local-llama` (llama.cpp), ctx 65 536, `--jinja --reasoning-budget 0`
@@ -61,12 +63,3 @@
 - **Самопроверка не работает:** приложила вывод, где `2+3 → 2`, и всё равно написала «все дефекты исправлены».
 - На одном из этапов доработки **пользовалась интернетом** (3 страницы Microsoft Learn: `Button.Click`,
   `Form.KeyPreview`, `KeyEventArgs.KeyCode`) — у остальных моделей такого доступа не было.
-
-## Воспроизведение
-
-```
-1. llama-server -m Qwen3.5-9B-Q4_K_M.gguf --host 127.0.0.1 --port 8090 --alias qwen3.5-9b-64k \
-     -c 65536 -fa on -ctk q8_0 -ctv q8_0 --jinja -np 1 --reasoning-format deepseek --reasoning-budget 0
-2. Задача: WinForms-калькулятор (.NET 8) + publish; затем консольные калькуляторы на 5 языках.
-3. Проверка: 8 эталонных выражений на stdin + ручные клики и клавиатура в WinForms.
-```

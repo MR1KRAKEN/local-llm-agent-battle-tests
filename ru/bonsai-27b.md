@@ -1,5 +1,7 @@
 # Bonsai-27B (Q1_0) — тест как агента DSH
 
+**Языки:** Русский (этот файл) · [English version](../bonsai-27b.md)
+
 **Источник:** [lmstudio-community/Bonsai-27B-GGUF](https://huggingface.co/lmstudio-community/Bonsai-27B-GGUF)
 **Файл:** `Bonsai-27B-Q1_0.gguf`, 3 803 452 576 байт (3.54 ГиБ); рядом мультимодальный проектор
 `mmproj-Bonsai-27B-BF16.gguf` (931 145 888 байт)
@@ -51,13 +53,3 @@
 - Квант Q1_0 даёт заметную деградацию даже на уровне связности ответа: медленный TTFT (7.74 с),
   длинные ответы без прогресса.
 - Для вижн-задач (у модели есть `mmproj`) эти тесты ничего не говорят — они про генерацию кода.
-
-## Воспроизведение
-
-```
-1. llama-server -m Bonsai-27B-Q1_0.gguf --mmproj mmproj-Bonsai-27B-BF16.gguf \
-     --host 127.0.0.1 --port 8090 --alias bonsai-27b-64k -c 65536 -fa on -ctk q8_0 -ctv q8_0 \
-     --jinja -np 1 --reasoning-format deepseek --reasoning-budget 0
-2. Задача: WinForms-калькулятор (.NET 8) + publish.
-3. Обязательно: внешний лимит токенов на шаг — иначе дегенерация не остановится сама.
-```

@@ -1,5 +1,7 @@
 # gpt-oss:20b (Ollama, MXFP4) — Agent Coding Test
 
+**Languages:** English (this file) · [Русская версия](ru/gpt-oss-20b.md)
+
 **Weights:** [openai/gpt-oss-20b](https://huggingface.co/openai/gpt-oss-20b), run through the Ollama library
 tag `gpt-oss:20b` (`registry.ollama.ai/library/gpt-oss/20b`, model layer 13,793,422,144 bytes).
 **Runtime:** Ollama (`local-ollama`) at `http://127.0.0.1:11434`; the main run used the `gpt-oss:20b-32k-stable`

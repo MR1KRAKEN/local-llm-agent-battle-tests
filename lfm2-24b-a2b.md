@@ -1,5 +1,7 @@
 # LFM2-24B-A2B (Q4_K_M) — Test as a DSH Agent
 
+**Languages:** English (this file) · [Русская версия](ru/lfm2-24b-a2b.md)
+
 **Weights:** [lmstudio-community/LFM2-24B-A2B-GGUF](https://huggingface.co/lmstudio-community/LFM2-24B-A2B-GGUF)
 — `LFM2-24B-A2B-Q4_K_M.gguf`, 14,415,473,952 bytes (13.43 GiB), MoE ~24B total / ~2B active
 **Runtime:** llama.cpp (`local-llama`), ctx 65,536, `--jinja`

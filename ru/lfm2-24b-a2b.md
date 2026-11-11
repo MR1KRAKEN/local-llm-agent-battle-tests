@@ -1,5 +1,7 @@
 # LFM2-24B-A2B (Q4_K_M) — тест как агента DSH
 
+**Языки:** Русский (этот файл) · [English version](../lfm2-24b-a2b.md)
+
 **Источник:** [lmstudio-community/LFM2-24B-A2B-GGUF](https://huggingface.co/lmstudio-community/LFM2-24B-A2B-GGUF)
 **Файл:** `LFM2-24B-A2B-Q4_K_M.gguf`, 14 415 473 952 байт (13.43 ГиБ), MoE ~24B / ~2B активных
 **Провайдер:** `local-llama` (llama.cpp), ctx 65 536, `--jinja`
@@ -52,14 +54,3 @@
   она не проваливала задачу, а не начинала её.
 - Косвенный сигнал: модель выбрала несуществующий инструмент `create_goal` из списка в 32 пункта —
   то есть ориентация в большом наборе инструментов у неё слабая.
-
-## Воспроизведение
-
-```
-1. llama-server -m LFM2-24B-A2B-Q4_K_M.gguf --host 127.0.0.1 --port 8090 --alias lfm2-24b-a2b-64k \
-     -c 65536 -fa on -ctk q8_0 -ctv q8_0 --jinja -np 1
-2. Проверка tool-calls вручную:
-   POST /v1/chat/completions с "tools": [...] и "tool_choice": "auto"
-   Ожидание: finish_reason = tool_calls.
-3. Запуск субагентом DSH с той же задачей: результат — вызов инструмента текстом, файлов нет.
-```

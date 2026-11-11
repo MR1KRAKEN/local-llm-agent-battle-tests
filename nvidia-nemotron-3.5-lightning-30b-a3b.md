@@ -1,5 +1,7 @@
 # NVIDIA Nemotron-3.5-Lightning-30B-A3B (Q4_0) — Agent Coding Test
 
+**Languages:** English (this file) · [Русская версия](ru/nvidia-nemotron-3.5-lightning-30b-a3b.md)
+
 **Weights:** [ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF](https://huggingface.co/ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF)
 — `NVIDIA-Nemotron-3.5-Lightning-30B-A3B-Q4_0.gguf`, 18,898,091,584 bytes (17.6 GiB), MoE 30B total / ~3B active
 **Runtime:** llama.cpp (`local-llama`), ctx 65,536, `--jinja --reasoning-budget 0`, KV cache q8_0

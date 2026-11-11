@@ -1,5 +1,7 @@
 # NVIDIA Nemotron-3.5-Lightning-30B-A3B (Q4_0) — тест в агентном цикле
 
+**Языки:** Русский (этот файл) · [English version](../nvidia-nemotron-3.5-lightning-30b-a3b.md)
+
 **Источник:** [ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF](https://huggingface.co/ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF)
 **Файл:** `NVIDIA-Nemotron-3.5-Lightning-30B-A3B-Q4_0.gguf`, 18 898 091 584 байт (17.6 ГиБ), MoE 30B / ~3B активных
 **Провайдер:** `local-llama` (llama.cpp), ctx 65 536, `--jinja --reasoning-budget 0`, KV q8_0
@@ -59,13 +61,3 @@ GUI, и почти полный консольный результат.
 - Не строит рекурсию из событий — типичная ошибка для моделей этого размера.
 - При пошаговой склейке файла частями теряет синтаксис: 6 из 7 сборок падали на незакрытых скобках.
 - Честно признаёт «готово» даже когда ввод падает — проверять надо самому.
-
-## Воспроизведение
-
-```
-1. llama-server -m NVIDIA-Nemotron-3.5-Lightning-30B-A3B-Q4_0.gguf --host 127.0.0.1 --port 8090 \
-     --alias nemotron-3.5-30b-64k -c 65536 -fa on -ctk q8_0 -ctv q8_0 --jinja -np 1 \
-     --reasoning-format deepseek --reasoning-budget 0
-2. Задача: WinForms-калькулятор (.NET 8) + publish в single-file exe.
-3. Проверка: запуск exe, клики мышью по кнопкам, ввод с клавиатуры, 8 эталонных выражений.
-```

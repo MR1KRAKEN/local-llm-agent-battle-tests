@@ -1,5 +1,7 @@
 # Qwen3.5-9B (Q4_K_M) — Agent Coding Test
 
+**Languages:** English (this file) · [Русская версия](ru/qwen3.5-9b.md)
+
 **Weights:** [lmstudio-community/Qwen3.5-9B-GGUF](https://huggingface.co/lmstudio-community/Qwen3.5-9B-GGUF)
 — `Qwen3.5-9B-Q4_K_M.gguf`, 5,627,044,256 bytes (5.24 GiB), plus `mmproj-Qwen3.5-9B-BF16.gguf` (921 MB)
 **Runtime:** llama.cpp (`local-llama`), ctx 65,536, `--jinja --reasoning-budget 0`

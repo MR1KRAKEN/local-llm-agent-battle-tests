@@ -1,5 +1,7 @@
 # Local LLM Agent Tests — WinForms Calculator + Five Languages
 
+**Languages:** English (this file) · [Русский](ru/README.md)
+
 A reproducible evaluation of five local models acting as **autonomous coding agents**: each model had to
 write a working **C#/WinForms calculator (.NET 8), build it and publish a single-file exe**, and then write
 **console calculators in Python, C, JavaScript, Rust and Java** verified against eight fixed expressions.

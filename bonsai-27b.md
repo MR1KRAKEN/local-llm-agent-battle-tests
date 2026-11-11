@@ -1,5 +1,7 @@
 # Bonsai-27B (Q1_0) — Test as a DSH Agent
 
+**Languages:** English (this file) · [Русская версия](ru/bonsai-27b.md)
+
 **Weights:** [lmstudio-community/Bonsai-27B-GGUF](https://huggingface.co/lmstudio-community/Bonsai-27B-GGUF)
 — `Bonsai-27B-Q1_0.gguf`, 3,803,452,576 bytes (3.54 GiB), plus the multimodal projector
 `mmproj-Bonsai-27B-BF16.gguf` (931,145,888 bytes)

@@ -55,6 +55,30 @@ single response can consume the whole session.
 - For vision tasks (the model ships with `mmproj`) these tests say nothing — they are about code generation.
 
 
+## Update: re-tested on the intended runtime (PrismML fork)
+
+After the first publication we re-ran this model on the **PrismML fork of llama.cpp** (prebuilt Windows CUDA
+13.3 build, `prism-b12128`), which is what the official card asks for, with the same `Bonsai-27B-Q1_0.gguf`
+and `mmproj-Bonsai-27B-BF16.gguf`.
+
+| Check | Stock llama.cpp (first run) | PrismML fork |
+| :--- | :--- | :--- |
+| Tool calls via API | not tested | ✅ `finish_reason: tool_calls`, correct JSON, ~1 s |
+| Agent writes code | never wrote a file | ✅ wrote a 369-line `Program.cs` (15 KB) |
+| WinForms build | 0 of 2 builds | ❌ build failed: `CS0246` on `KeyEvent` and `Key` (invented type names) |
+| Console Python | — | `0 / 8` — parser returns `None`, expressions truncated to the first number |
+| Console JavaScript | — | **`8 / 8`** — 1230 bytes, all eight cases correct |
+| Console C | — | `6 / 8` — `2.5+1.5 → 2.5`, `0.1+0.2 → 0.1`: decimals truncated |
+| VRAM | 9.1 GiB | 8.6 GiB |
+
+**What this changes.** The degeneration we reported earlier is specific to the stock build: on the fork the
+model answers normally, calls tools and writes substantial code. It is still not a reliable coder at 1 bit —
+it invents WinForms type names and its Python parser is broken — but the harsh "unsuitable for code" verdict
+should be read as "unsuitable in the stock build". JavaScript it handled perfectly.
+
+**Practical lesson.** For Q1_0_g128 weights the runtime choice is not cosmetic: same file, same prompt,
+two different outcomes.
+
 ## Third-party reports on these exact weights
 
 - **The intended runtime is a patched llama.cpp.** The official repository

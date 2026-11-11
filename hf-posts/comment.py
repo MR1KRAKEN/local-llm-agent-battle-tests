@@ -35,7 +35,9 @@ correct our own wording:
   `<|tool_call_start|>[func(arg="x")]<|tool_call_end|>` with tools passed as JSON in the system prompt.
   Our harness sends OpenAI-style `tools`, which explains the mismatch we reported.
 - **Bonsai Q1_0 expects a patched runtime.** The official repo asks for the PrismML llama.cpp fork with
-  dedicated 1-bit kernels. We ran the stock build, so our degeneration result describes that setup only.
+  dedicated 1-bit kernels. We re-ran it there: tool calls work, it writes real code, JavaScript scores 8/8,
+  C 6/8, Python 0/8, WinForms still fails to compile. The degeneration we first reported belongs to the stock
+  build, not to the model.
 - **gpt-oss has known template bugs**: the `commentary` channel left valid without tools drops BFCL_v4 to ~3%
   ([#274](https://huggingface.co/openai/gpt-oss-20b/discussions/274)), and the template crashes on tool calls
   with `content: null` ([#272](https://huggingface.co/openai/gpt-oss-20b/discussions/272)).
@@ -80,15 +82,33 @@ In our agent run the harness sent OpenAI-style `tools`. Through the raw API the 
 So the failure we reported is a protocol mismatch between the harness and this template, **not** evidence that
 the model cannot call tools. Worth checking before ruling the model out for agent work.""" + COMMON_EN),
 
-    ("lmstudio-community/Bonsai-27B-GGUF", 3, """**Follow-up: our result may be a runtime artifact**
+    ("lmstudio-community/Bonsai-27B-GGUF", 3, """**Follow-up: re-tested on the PrismML fork — our first result was a runtime artifact**
 
-Important correction. The official repository ([prism-ml/Bonsai-27B-gguf](https://huggingface.co/prism-ml/Bonsai-27B-gguf))
+Important correction, now confirmed by a re-run.
+
+The official repository ([prism-ml/Bonsai-27B-gguf](https://huggingface.co/prism-ml/Bonsai-27B-gguf))
 states that Q1_0_g128 needs the **PrismML fork of llama.cpp** with dedicated 1-bit hybrid-attention kernels,
-and claims 76.11 average over 15 thinking benchmarks (89.5% of FP16, coding 81.88).
+and claims 76.11 average over 15 thinking benchmarks (89.5% of FP16, coding 81.88). Our first test ran the
+**stock build** and the model degenerated: one answer of 15,574 tokens against an 8192 limit, no successful
+build.
 
-Our test ran the **stock llama.cpp build**. Under it the model degenerated — a single answer of 15,574 tokens
-against a 8192 limit — and produced no successful build. That describes the stock configuration, not the model
-in its intended runtime.
+We then installed the prebuilt Windows CUDA 13.3 build of that fork (`prism-b12128`) and re-ran the same
+weights, same prompts:
+
+| Check | Stock llama.cpp | PrismML fork |
+| :--- | :--- | :--- |
+| Tool calls via API | not tested | `finish_reason: tool_calls`, correct JSON, ~1 s |
+| Agent writes code | never wrote a file | wrote a 369-line `Program.cs` (15 KB) |
+| WinForms → exe | 0 of 2 builds | build fails: `CS0246` on `KeyEvent` and `Key` (invented types) |
+| Console JavaScript | — | **8 / 8**, 1230 bytes |
+| Console C | — | 6 / 8 — `0.1+0.2 → 0.1`, decimals truncated |
+| Console Python | — | 0 / 8 — parser returns `None` |
+| VRAM | 9.1 GiB | 8.6 GiB |
+
+So the degeneration was the stock build, not the model: on the intended runtime it answers normally, calls
+tools and writes substantial code. It is still not a strong coder at 1 bit — it invents WinForms type names,
+truncates decimals and once misreported its own three tests as passing — but the earlier "unsuitable for code"
+verdict should be read as "unsuitable in the stock build". JavaScript it handled perfectly.
 
 The base model is Qwen3.6-27B, which also explains
 [discussion #2](https://huggingface.co/lmstudio-community/Bonsai-27B-GGUF/discussions/2) here, where the model

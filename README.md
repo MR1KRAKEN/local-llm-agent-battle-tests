@@ -25,11 +25,14 @@ write a working **C#/WinForms calculator (.NET 8), build it and publish a single
 The GGUF repositories were verified to contain exactly the files used (checked against the Hugging Face
 API, including `mmproj` files for the vision-capable models).
 
-Three more models were tested and **removed from disk after the runs**, with the owner's approval:
-Devstral-Small-2-24B (its chat template rejects the harness message order — see below), Llama-3.1-8B-Instruct
-(zero tool calls under Ollama; tool calls appear under llama.cpp but the agent loop collapsed) and
-Ministral-3-14B-Instruct Q8 (5.45 tok/s because 14.2 GiB does not fit 12 GB of VRAM, and no tool call in
-seven minutes).
+Three further models were probed during the extended runs. They are **not part of the main tables** because
+they turned out to be unsuitable for agent work on this hardware, but the findings are worth recording:
+
+| Model | What blocked it |
+| :--- | :--- |
+| Devstral-Small-2-24B (IQ3_XXS) | its chat template rejects the harness message order (`conversation roles must alternate user and assistant`), and with a lenient template the tool calls disappear |
+| Llama-3.1-8B-Instruct | zero tool calls under Ollama; under llama.cpp the tool calls appear, but the agent loop collapses on compiler feedback |
+| Ministral-3-14B-Instruct (Q8) | 5.45 tok/s — 14.2 GiB does not fit in 12 GB of VRAM, and no tool call in seven minutes |
 
 ## Test bench
 

@@ -82,6 +82,12 @@ Python 3.14, gcc (WinLibs UCRT), Node 24.17, rustc, Oracle JDK, llama.cpp CUDA `
 - [gpt-oss:20b](gpt-oss-20b.md)
 - [flint-24B (MoE) — быстрая, но думает больше, чем делает](flint-24b.md)
 
+## Заметки по оркестрации
+
+- [Параллелизм, роли и повторяемость](orchestration-notes.md) — сколько агентов влезает на один сервер,
+  ловушка с контекстом на слот, конвейер «исследователь → исполнители → проверяющий» и четыре прогона
+  одной и той же задачи (среднее 7.0/8, полностью верных 50%).
+
 Полные протоколы с логами: `BATTLE2_REPORT.md`, `BATTLE3_DSH.md`, `battle-3-refinement\REFINEMENT_REPORT.md`,
 сводка: `BATTLE_SUMMARY.md`.
 

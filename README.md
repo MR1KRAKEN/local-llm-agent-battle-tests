@@ -86,6 +86,12 @@ functional check: mouse clicks on buttons, keyboard input, non-trivial arithmeti
 - [gpt-oss:20b](gpt-oss-20b.md)
 - [flint-24B (MoE) — fast, but thinks more than it does](flint-24b.md)
 
+## Orchestration notes
+
+- [Concurrency, roles and repeatability](orchestration-notes.md) — how many agents fit on one server, the
+  context-per-slot pitfall, a researcher/implementer/reviewer pipeline, and four identical runs of the same
+  task (mean 7.0/8, fully correct in 50% of runs).
+
 ## Caveats
 
 - Models had no internet access, except Qwen during one refinement round (three Microsoft Learn pages);

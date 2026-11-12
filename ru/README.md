@@ -2,7 +2,7 @@
 
 **Языки:** Русский (этот файл) · [English](../README.md)
 
-Публикуемый набор отчётов по пяти локальным моделям, прогнанным в одинаковой задаче:
+Публикуемый набор отчётов по семи локальным моделям, прогнанным в одинаковой задаче:
 **написать работающий WinForms-калькулятор на C#/.NET 8, собрать его в exe** и, дополнительно,
 **консольные калькуляторы на Python, C, JavaScript, Rust и Java** с проверкой на 8 эталонных выражениях.
 
@@ -19,9 +19,14 @@
 | LFM2-24B-A2B | [lmstudio-community/LFM2-24B-A2B-GGUF](https://huggingface.co/lmstudio-community/LFM2-24B-A2B-GGUF) | Q4_K_M | 13.43 ГиБ |
 | Bonsai-27B | [lmstudio-community/Bonsai-27B-GGUF](https://huggingface.co/lmstudio-community/Bonsai-27B-GGUF) | Q1_0 | 3.54 ГиБ |
 | gpt-oss:20b | библиотека Ollama (`registry.ollama.ai/library/gpt-oss:20b`) | MXFP4 | 12.8 ГиБ |
+| flint-24B (MoE) | [lmstudio-community/flint-GGUF](https://huggingface.co/lmstudio-community/flint-GGUF), веса [RecursiveSI/flint](https://huggingface.co/RecursiveSI/flint) | Q4_K_M | 22.5 ГиБ |
+| qwen3:30b | библиотека Ollama (`registry.ollama.ai/library/qwen3:30b`) | Q4_K_M | 17.3 ГиБ |
 
-Devstral-24B в эти отчёты не входит: в предыдущем прогоне он выдал 9.2 tok/s и не уложился в лимит —
-исключён решением владельца стенда.
+Ещё три модели проверены и **удалены с диска после прогонов**, с согласия владельца стенда:
+Devstral-Small-2-24B (его шаблон не принимает порядок сообщений харнесса), Llama-3.1-8B-Instruct
+(ноль вызовов инструментов под Ollama; под llama.cpp вызовы появились, но агентный цикл развалился) и
+Ministral-3-14B-Instruct Q8 (5.45 tok/s, потому что 14.2 ГиБ не влезают в 12 ГБ VRAM, и ни одного вызова
+инструмента за семь минут).
 
 ## Стенд
 
@@ -72,6 +77,7 @@ Python 3.14, gcc (WinLibs UCRT), Node 24.17, rustc, Oracle JDK, llama.cpp CUDA `
 - [LFM2-24B-A2B](lfm2-24b-a2b.md)
 - [Bonsai-27B](bonsai-27b.md)
 - [gpt-oss:20b](gpt-oss-20b.md)
+- [flint-24B (MoE) — быстрая, но думает больше, чем делает](flint-24b.md)
 
 Полные протоколы с логами: `BATTLE2_REPORT.md`, `BATTLE3_DSH.md`, `battle-3-refinement\REFINEMENT_REPORT.md`,
 сводка: `BATTLE_SUMMARY.md`.

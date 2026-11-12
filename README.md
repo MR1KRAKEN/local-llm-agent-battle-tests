@@ -2,7 +2,7 @@
 
 **Languages:** English (this file) · [Русский](ru/README.md)
 
-A reproducible evaluation of five local models acting as **autonomous coding agents**: each model had to
+A reproducible evaluation of local models acting as **autonomous coding agents**: each model had to
 write a working **C#/WinForms calculator (.NET 8), build it and publish a single-file exe**, and then write
 **console calculators in Python, C, JavaScript, Rust and Java** verified against eight fixed expressions.
 
@@ -19,10 +19,17 @@ write a working **C#/WinForms calculator (.NET 8), build it and publish a single
 | LFM2-24B-A2B | [lmstudio-community/LFM2-24B-A2B-GGUF](https://huggingface.co/lmstudio-community/LFM2-24B-A2B-GGUF) | Q4_K_M | 13.43 GiB | [discussions](https://huggingface.co/lmstudio-community/LFM2-24B-A2B-GGUF/discussions) |
 | Bonsai-27B | [lmstudio-community/Bonsai-27B-GGUF](https://huggingface.co/lmstudio-community/Bonsai-27B-GGUF) | Q1_0 | 3.54 GiB | [discussions](https://huggingface.co/lmstudio-community/Bonsai-27B-GGUF/discussions) |
 | gpt-oss:20b | [openai/gpt-oss-20b](https://huggingface.co/openai/gpt-oss-20b) (run via Ollama library `gpt-oss:20b`) | MXFP4 | 12.8 GiB | [discussions](https://huggingface.co/openai/gpt-oss-20b/discussions) |
+| flint-24B (MoE) | [lmstudio-community/flint-GGUF](https://huggingface.co/lmstudio-community/flint-GGUF) (weights: [RecursiveSI/flint](https://huggingface.co/RecursiveSI/flint)) | Q4_K_M | 22.5 GiB | [discussions](https://huggingface.co/lmstudio-community/flint-GGUF/discussions) |
+| qwen3:30b | [Qwen/Qwen3-30B-A3B](https://huggingface.co/Qwen/Qwen3-30B-A3B) (run via Ollama library `qwen3:30b`) | Q4_K_M | 17.3 GiB | [discussions](https://huggingface.co/Qwen/Qwen3-30B-A3B/discussions) |
 
-All four GGUF repositories were verified to contain exactly the files used (checked against the Hugging Face
-API, including `mmproj` files for the vision-capable models). Devstral-24B is not included: an earlier run
-measured 9.2 tok/s and it could not finish within the time limit.
+The GGUF repositories were verified to contain exactly the files used (checked against the Hugging Face
+API, including `mmproj` files for the vision-capable models).
+
+Three more models were tested and **removed from disk after the runs**, with the owner's approval:
+Devstral-Small-2-24B (its chat template rejects the harness message order — see below), Llama-3.1-8B-Instruct
+(zero tool calls under Ollama; tool calls appear under llama.cpp but the agent loop collapsed) and
+Ministral-3-14B-Instruct Q8 (5.45 tok/s because 14.2 GiB does not fit 12 GB of VRAM, and no tool call in
+seven minutes).
 
 ## Test bench
 
@@ -74,6 +81,7 @@ functional check: mouse clicks on buttons, keyboard input, non-trivial arithmeti
 - [LFM2-24B-A2B](lfm2-24b-a2b.md)
 - [Bonsai-27B](bonsai-27b.md)
 - [gpt-oss:20b](gpt-oss-20b.md)
+- [flint-24B (MoE) — fast, but thinks more than it does](flint-24b.md)
 
 ## Caveats
 

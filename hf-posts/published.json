@@ -22,5 +22,9 @@
  "gpt-oss-20b.md": {
   "repo": "openai/gpt-oss-20b",
   "url": "https://huggingface.co/openai/gpt-oss-20b/discussions/279"
+ },
+ "flint-24b.md": {
+  "repo": "lmstudio-community/flint-GGUF",
+  "url": "https://huggingface.co/lmstudio-community/flint-GGUF/discussions/2"
  }
 }
